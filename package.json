@@ -17,17 +17,24 @@
     "vitest:watch": "vitest",
     "test": "npm run typecheck && npm run prettier && npm run lint && npm run vitest && npm run build",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build"
+    "storybook:build": "storybook build",
+    "gql-schema-to-ts": "graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.8",
     "@mantine/core": "7.13.0",
     "@mantine/hooks": "7.13.0",
+    "graphql": "^16.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1"
+    "react-router-dom": "^6.26.1",
+    "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/client-preset": "^4.3.3",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
