@@ -1,5 +1,5 @@
 import { Lot, Maybe } from '@gql-types';
-import { BackgroundImage, Box, Text } from '@mantine/core';
+import { BackgroundImage, Box } from '@mantine/core';
 import fallbackImage from '../assets/placeholder.jpeg';
 import { LotInfo } from './LotInfo';
 import { FloatingReactionButton } from './ReactionButton';
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function ParkingLot({ lot, onLotDisliked, onLotLiked }: Props) {
-  if (!lot) return null;
+  if (!lot) {return null;}
 
   return (
     <Box w={600} mx="auto" style={{ position: 'relative' }}>

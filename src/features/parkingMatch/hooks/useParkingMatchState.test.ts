@@ -1,12 +1,8 @@
-import { Lot, Query } from '@gql-types';
+import { Lot } from '@gql-types';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { Mock, vi } from 'vitest';
 import { usePaginatedParkingLots } from './usePaginatedParkingLots';
-import {
-  ParkingMatchContext,
-  parkingsPageSize,
-  useParkingMatchState,
-} from './useParkingMatchState';
+import { useParkingMatchState } from './useParkingMatchState';
 
 vi.mock('./usePaginatedParkingLots', () => ({
   usePaginatedParkingLots: vi.fn(),

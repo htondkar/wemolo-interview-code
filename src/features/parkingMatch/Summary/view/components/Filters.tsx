@@ -53,7 +53,7 @@ export function Filters({ filters, dispatch }: Props): JSX.Element {
           />
         </Flex>
 
-        <Divider variant="solid" orientation="vertical"></Divider>
+        <Divider variant="solid" orientation="vertical" />
 
         <Flex gap="xs" align="center">
           <Title order={5}>Type: </Title>
@@ -79,7 +79,7 @@ export function Filters({ filters, dispatch }: Props): JSX.Element {
           />
         </Flex>
 
-        <Divider variant="solid" orientation="vertical"></Divider>
+        <Divider variant="solid" orientation="vertical" />
 
         <Flex gap="xs" align="center">
           <Radio

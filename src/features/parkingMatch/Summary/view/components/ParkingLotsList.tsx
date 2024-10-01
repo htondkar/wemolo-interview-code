@@ -24,7 +24,7 @@ export function ParkingLotsList({
 
         <Table.Tbody>
           {lots.map((lot) => {
-            if (!lot) return null;
+            if (!lot) {return null;}
             const likedState = getLotLikedState(lot);
             return (
               <Table.Tr key={lot.id}>

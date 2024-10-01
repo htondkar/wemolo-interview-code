@@ -1,8 +1,6 @@
-import React from 'react';
 import { Lot, Maybe } from '@gql-types';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import { MantineProvider } from '@mantine/core';
 import { renderWithContext } from '../../../../../../test-utils/render';
 import { ParkingLot } from './ParkingLot';
 

@@ -26,7 +26,7 @@ export function useParkingMatchState(): ParkingAppState {
     query.fetchMore({
       variables: { limit: parkingsPageSize, offset: availableLots.length },
       updateQuery: (prev, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return prev;
+        if (!fetchMoreResult) {return prev;}
 
         return {
           getAllParkingLots: [
