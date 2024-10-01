@@ -1,7 +1,6 @@
-import { Container, Divider, Title } from '@mantine/core';
 import { Outlet } from 'react-router-dom';
+import { Container, Divider, Title } from '@mantine/core';
 import { ParkingMatchContext, useParkingMatchState } from './hooks/useParkingMatchState';
-
 
 export function ParkingMatch() {
   const appState = useParkingMatchState();
@@ -14,5 +13,5 @@ export function ParkingMatch() {
         <Outlet />
       </Container>
     </ParkingMatchContext.Provider>
-  )
+  );
 }

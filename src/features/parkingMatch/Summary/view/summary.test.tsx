@@ -1,11 +1,10 @@
-import { screen } from '@testing-library/react';
-import { Summary } from './Summary';
 import { Lot } from '@gql-types';
-import { LikedState, ParkingAppState } from '../../types';
+import { screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { renderWithContext } from '../../../../../test-utils/render';
 import { ParkingMatchContext } from '../../hooks/useParkingMatchState';
-
+import { ParkingAppState } from '../../types';
+import { Summary } from './Summary';
 
 const mockState = {
   likeStatus: {
@@ -15,8 +14,8 @@ const mockState = {
   filteredLots: [
     { id: '1', name: 'Lot A', address: 'Address A', status: 'active', type: 'store', match: 90 },
     { id: '2', name: 'Lot B', address: 'Address B', status: 'inactive', type: 'hotel', match: 80 },
-  ],
-} as const;
+  ] as const,
+};
 
 describe('Summary Component', () => {
   beforeEach(() => {
@@ -25,17 +24,22 @@ describe('Summary Component', () => {
 
   function renderSummary() {
     return renderWithContext(
-      <ParkingMatchContext.Provider value={{
-        lots: mockState.filteredLots,
-        getLotLikedState: ({ id }: Lot) => mockState.likeStatus[id] as LikedState,
-      } as unknown as ParkingAppState}>
+      <ParkingMatchContext.Provider
+        value={
+          {
+            lots: mockState.filteredLots,
+            getLotLikedState: ({ id }: Lot) =>
+              mockState.likeStatus[id as (typeof mockState)['filteredLots'][number]['id']],
+          } as unknown as ParkingAppState
+        }
+      >
         <Summary />
       </ParkingMatchContext.Provider>
     );
   }
 
   it('should render filter buttons and radio buttons', () => {
-    renderSummary()
+    renderSummary();
 
     expect(screen.getByText('Sort by name')).toBeInTheDocument();
     expect(screen.getByText('Status:')).toBeInTheDocument();
@@ -51,7 +55,7 @@ describe('Summary Component', () => {
   });
 
   it('should render filtered lots', () => {
-    renderSummary()
+    renderSummary();
 
     expect(screen.getByText('Lot A')).toBeInTheDocument();
     expect(screen.getByText('Address A')).toBeInTheDocument();

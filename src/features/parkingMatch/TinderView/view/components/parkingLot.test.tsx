@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ParkingLot } from './ParkingLot';
 import { Lot, Maybe } from '@gql-types';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
 import { MantineProvider } from '@mantine/core';
 import { renderWithContext } from '../../../../../../test-utils/render';
+import { ParkingLot } from './ParkingLot';
 
 const mockLot: Maybe<Lot> = {
   id: '1',
@@ -25,12 +25,14 @@ describe('ParkingLot Component', () => {
   });
 
   function renderParkingLot(lot: Maybe<Lot> = mockLot) {
-    return renderWithContext(<ParkingLot lot={lot} onLotLiked={onLotLiked} onLotDisliked={onLotDisliked} />)
+    return renderWithContext(
+      <ParkingLot lot={lot} onLotLiked={onLotLiked} onLotDisliked={onLotDisliked} />
+    );
   }
 
   it('should render nothing if no lot is provided', () => {
     const { container } = renderParkingLot(null);
-    expect(container.querySelector("image")).toBeNull();
+    expect(container.querySelector('image')).toBeNull();
   });
 
   it('should render the lot details', () => {

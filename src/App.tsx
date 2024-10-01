@@ -1,12 +1,10 @@
 import '@mantine/core/styles.css';
 
+import { ApolloProvider } from '@apollo/client';
 import { MantineProvider } from '@mantine/core';
+import { client } from './apolloClient';
 import { Router } from './Router';
 import { theme } from './theme';
-import { client } from './gqlClient';
-import { ApolloProvider } from '@apollo/client';
-
-
 
 export default function App() {
   return (

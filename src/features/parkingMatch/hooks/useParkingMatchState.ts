@@ -1,8 +1,7 @@
+import { createContext, useCallback, useState } from 'react';
 import { Lot } from '@gql-types';
-import { useState, useCallback, createContext } from 'react';
 import { ParkingAppState } from '../types';
 import { usePaginatedParkingLots } from './usePaginatedParkingLots';
-
 
 export const parkingsPageSize = 5;
 
@@ -11,15 +10,15 @@ export const ParkingMatchContext = createContext<ParkingAppState>({
   lotToDisplay: null,
   isLoadingLots: false,
   getLotLikedState: () => undefined,
-  onLotDisliked: () => { },
-  onLotLiked: () => { },
+  onLotDisliked: () => {},
+  onLotLiked: () => {},
 });
 
 export function useParkingMatchState(): ParkingAppState {
   const [likedState, setLikedState] = useState<Record<string, 'liked' | 'disliked'>>({});
   const [displayedItemIndex, setDisplayedItemIndex] = useState(0);
 
-  const query = usePaginatedParkingLots()
+  const query = usePaginatedParkingLots();
 
   const availableLots = query.data?.getAllParkingLots || [];
 
@@ -30,12 +29,14 @@ export function useParkingMatchState(): ParkingAppState {
         if (!fetchMoreResult) return prev;
 
         return {
-          getAllParkingLots: [...(prev.getAllParkingLots ?? []), ...(fetchMoreResult.getAllParkingLots ?? [])]
+          getAllParkingLots: [
+            ...(prev.getAllParkingLots ?? []),
+            ...(fetchMoreResult.getAllParkingLots ?? []),
+          ],
         };
-      }
+      },
     });
   }, [availableLots]);
-
 
   return {
     lots: availableLots,
@@ -43,20 +44,20 @@ export function useParkingMatchState(): ParkingAppState {
     isLoadingLots: query.loading,
     getLotLikedState: (lot: Lot) => likedState[lot.id],
     onLotLiked: (lot: Lot) => {
-      setLikedState(state => ({ ...state, [lot.id]: 'liked' }));
-      setDisplayedItemIndex(state => state + 1);
+      setLikedState((state) => ({ ...state, [lot.id]: 'liked' }));
+      setDisplayedItemIndex((state) => state + 1);
 
       if (displayedItemIndex === availableLots.length - 1) {
         fetchMoreLots();
       }
     },
     onLotDisliked: (lot: Lot) => {
-      setLikedState(state => ({ ...state, [lot.id]: 'disliked' }));
-      setDisplayedItemIndex(state => state + 1);
+      setLikedState((state) => ({ ...state, [lot.id]: 'disliked' }));
+      setDisplayedItemIndex((state) => state + 1);
 
       if (displayedItemIndex === availableLots.length - 1) {
         fetchMoreLots();
       }
-    }
+    },
   };
 }
